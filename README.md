@@ -14,14 +14,14 @@ The primary use of this Docker image is to use it in our [Continuous Integration
 But you may also run it on your own machine:
 
 ~~~~
-docker run -d --name=taurus-stretch -h taurus-test cpascual/taurus-test:debian-stretch
+docker run -id --name=taurus-stretch -h taurus-test cpascual/taurus-test:debian-stretch
 ~~~~
 
 ... or, if you want to launch GUI apps from the container **and do not mind about X security**:
 
 ~~~~
 xhost +local:
-docker run -d --name=taurus-stretch -h taurus-test -e DISPLAY=$DISPLAY -e QT_X11_NO_MITSHM=1 -v /tmp/.X11-unix:/tmp/.X11-unix cpascual/taurus-test:debian-stretch
+docker run -id --name=taurus-stretch -h taurus-test -e DISPLAY=$DISPLAY -e QT_X11_NO_MITSHM=1 -v /tmp/.X11-unix:/tmp/.X11-unix cpascual/taurus-test:debian-stretch
 ~~~~
 
 Then you can log into the container with:
