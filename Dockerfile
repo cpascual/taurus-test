@@ -27,22 +27,31 @@ RUN apt-get install -y tango-db
 #install tango-test DS
 RUN apt-get install -y tango-test
 
+# install pyqt4 dummy package to avoid dependency problem with python3-qwt 
+ADD python3-pyqt4-dummy_1.0_all.deb /
+RUN dpkg -i /python3-pyqt4-dummy_1.0_all.deb
+
+# define preferred Qt for qtchooser
+ENV QT_SELECT 5
+
 # install taurus dependencies
 RUN apt-get install -y python3-numpy \
-                       python3-guiqwt \
+                       python3-pyqt5 \
+                       python3-pyqt5.qtopengl \
                        python3-h5py \
                        python3-lxml \
                        python3-pint \
+                       python3-future \
                        python3-ply \
                        python3-pytango \
-                       python3-pyqt4 \
                        python3-spyderlib \
                        python3-pymca5 \
-                       qt4-designer \
+                       qttools5-dev-tools \
                        python3-sphinx-rtd-theme \
                        graphviz \
-                       python3-pyqtgraph
-
+                       python3-pyqtgraph \
+                       python3-guiqwt
+                       
 # install some utilities
 RUN apt-get install -y git \
                        python3-pip \
