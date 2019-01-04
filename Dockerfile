@@ -85,5 +85,9 @@ ADD testioc.db /
 # add USER ENV (necessary for spyderlib in taurus.qt.qtgui.editor)
 ENV USER=root
 
+# WORKAROUND for https://github.com/taurus-org/taurus/issues/836
+# It can be removed if python-h5py package is updated to >=2.8
+ENV LANG=C.UTF-8
+
 # start supervisor as deamon
 CMD ["/usr/bin/supervisord"]
