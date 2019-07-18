@@ -40,18 +40,22 @@ Note: this image does not contain taurus itself (since it is designed for instal
   apt-get install python-taurus -y
   ~~~~
 
-- Example 2: installing the latest develop version from the git repo (you may use any other branch instead of develop):
+- Example 2: installing the latest versions of taurus and taurus_pyqtgraph
+  from the git repos in editable mode.:
   
   ~~~~
   git clone -b develop https://github.com/taurus-org/taurus.git
-  cd taurus
-  python setup.py install
+  pip3 install -e ./taurus 
+
+  git clone -b master https://github.com/taurus-org/taurus_pyqtgraph.git
+  pip3 install -e ./taurus_pyqtgraph 
   ~~~~
 
 - Example 3: using pip to do the same as in example 2:
  
   ~~~~
-  pip install git+https://github.com/taurus-org/taurus.git@develop
+  pip3 install git+https://github.com/taurus-org/taurus.git@develop
+  pip3 install git+https://github.com/taurus-org/taurus_pyqtgraph.git@master
   ~~~~
   
 

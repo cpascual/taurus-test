@@ -27,29 +27,36 @@ RUN apt-get install -y tango-db
 #install tango-test DS
 RUN apt-get install -y tango-test
 
+# install pyqt4 dummy package to avoid dependency problem with python3-qwt 
+ADD python3-pyqt4-dummy_1.0_all.deb /
+RUN dpkg -i /python3-pyqt4-dummy_1.0_all.deb
+
+# define preferred Qt for qtchooser
+ENV QT_SELECT 5
+
 # install taurus dependencies
-RUN apt-get install -y python-numpy \
-                       python-enum34 \
-                       python-guiqwt \
-                       python-h5py \
-                       python-lxml \
-                       python-pint \
-                       python-ply \
-                       python-pytango \
-                       python-qt4 \
-                       python-qwt5-qt4 \
-                       python-spyderlib \
-                       python-pymca5 \
-                       qt4-designer \
-                       python-sphinx-rtd-theme \
+RUN apt-get install -y python3-numpy \
+                       python3-pyqt5 \
+                       python3-pyqt5.qtopengl \
+                       python3-h5py \
+                       python3-lxml \
+                       python3-pint \
+                       python3-future \
+                       python3-ply \
+                       python3-pytango \
+                       python3-spyderlib \
+                       python3-pymca5 \
+                       qttools5-dev-tools \
+                       python3-sphinx-rtd-theme \
                        graphviz \
-                       python-pyqtgraph
+                       python3-pyqtgraph \
+                       python3-guiqwt
 
 # install some utilities
 RUN apt-get install -y git \
-                       python-pip \
+                       python3-pip \
                        vim \
-                       ipython \
+                       ipython3 \
                        procps
 
 # instal virtual monitor
@@ -77,7 +84,7 @@ RUN apt-get update
 RUN apt-get install -y epics-dev
 
 # install pyepics
-RUN pip install pyepics
+RUN pip3 install pyepics
 
 # copy test epics IOC database
 ADD testioc.db /
@@ -85,5 +92,8 @@ ADD testioc.db /
 # add USER ENV (necessary for spyderlib in taurus.qt.qtgui.editor)
 ENV USER=root
 
-# start supervisor as deamon
-CMD ["/usr/bin/supervisord"]
+# Set python3 as the default version for the python executable
+RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 2
+
+# start supervisor as deamon (force using python2, since supervisord <4 does not run on py3)
+CMD ["/usr/bin/python2", "/usr/bin/supervisord"]
