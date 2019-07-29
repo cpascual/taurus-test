@@ -51,7 +51,8 @@ RUN apt-get install -y python3-numpy \
                        python3-sphinx-rtd-theme \
                        graphviz \
                        python3-pyqtgraph \
-                       python3-guiqwt
+                       python3-guiqwt \
+                       python3-click
 
 # install some utilities
 RUN apt-get install -y git \
