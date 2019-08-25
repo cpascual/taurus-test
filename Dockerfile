@@ -52,7 +52,8 @@ RUN apt-get install -y python3-numpy \
                        graphviz \
                        python3-pyqtgraph \
                        python3-guiqwt \
-                       python3-click
+                       python3-click \
+                       python3-pytest
 
 # install some utilities
 RUN apt-get install -y git \
