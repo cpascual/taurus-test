@@ -44,7 +44,8 @@ RUN apt-get install -y python-numpy \
                        python-sphinx-rtd-theme \
                        graphviz \
                        python-pyqtgraph \
-                       python-click
+                       python-click \
+                       python-pytest
 
 # install some utilities
 RUN apt-get install -y git \
